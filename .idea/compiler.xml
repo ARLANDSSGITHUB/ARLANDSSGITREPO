@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="DSS6-MS-REVIEW-V1" />
+        <module name="DSS5-MS-ACTOR-V1" />
+        <module name="DSS2-REST-BE-V1" />
+        <module name="DSS1-UI-V1" />
+        <module name="DSS4-MS-MOVIE-V1" />
+        <module name="DSS3-MS-LOGIN-V1" />
+        <module name="DSS7-EUREKA-V1" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DSS1-UI-V1" target="1.8" />
+      <module name="DSS2-REST-BE-V1" target="1.8" />
+      <module name="DSS3-MS-LOGIN-V1" target="1.8" />
+      <module name="DSS4-MS-MOVIE-V1" target="1.8" />
+      <module name="DSS4-MS-MOVIE-V1 (1)" target="1.8" />
+      <module name="DSS5-MS-ACTOR-V1" target="1.8" />
+      <module name="DSS6-MS-REVIEW-V1" target="1.8" />
+      <module name="DSS7-EUREKA-V1" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="DSS1-UI-V1" options="-parameters" />
+      <module name="DSS2-REST-BE-V1" options="-parameters" />
+      <module name="DSS3-MS-LOGIN-V1" options="-parameters" />
+      <module name="DSS4-MS-MOVIE-V1" options="-parameters" />
+      <module name="DSS4-MS-MOVIE-V1 (1)" options="-parameters" />
+      <module name="DSS5-MS-ACTOR-V1" options="-parameters" />
+      <module name="DSS6-MS-REVIEW-V1" options="-parameters" />
+      <module name="DSS7-EUREKA-V1" options="-parameters" />
+    </option>
+  </component>
+</project>

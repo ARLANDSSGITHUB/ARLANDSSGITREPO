@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/DSS1-UI-V1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DSS2-REST-BE-V1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DSS3-MS-LOGIN-V1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DSS4-MS-MOVIE-V1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DSS5-MS-ACTOR-V1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DSS6-MS-REVIEW-V1/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DSS7-EUREKA-V1/src/main/java" charset="UTF-8" />
+  </component>
+</project>
