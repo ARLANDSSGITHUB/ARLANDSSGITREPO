@@ -2,13 +2,16 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="DSS6-MS-REVIEW-V1" />
+        <module name="CLIENT-APP" />
         <module name="DSS5-MS-ACTOR-V1" />
         <module name="DSS2-REST-BE-V1" />
+        <module name="DSS8-API-GATEWAY" />
         <module name="DSS1-UI-V1" />
         <module name="DSS4-MS-MOVIE-V1" />
         <module name="DSS3-MS-LOGIN-V1" />
@@ -16,18 +19,21 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="CLIENT-APP" target="1.8" />
       <module name="DSS1-UI-V1" target="1.8" />
       <module name="DSS2-REST-BE-V1" target="1.8" />
-      <module name="DSS3-MS-LOGIN-V1" target="1.8" />
-      <module name="DSS4-MS-MOVIE-V1" target="1.8" />
+      <module name="DSS3-MS-LOGIN-V1" target="11" />
+      <module name="DSS4-MS-MOVIE-V1" target="11" />
       <module name="DSS4-MS-MOVIE-V1 (1)" target="1.8" />
-      <module name="DSS5-MS-ACTOR-V1" target="1.8" />
-      <module name="DSS6-MS-REVIEW-V1" target="1.8" />
-      <module name="DSS7-EUREKA-V1" target="1.8" />
+      <module name="DSS5-MS-ACTOR-V1" target="11" />
+      <module name="DSS6-MS-REVIEW-V1" target="11" />
+      <module name="DSS7-EUREKA-V1" target="11" />
+      <module name="DSS8-API-GATEWAY" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="CLIENT-APP" options="-parameters" />
       <module name="DSS1-UI-V1" options="-parameters" />
       <module name="DSS2-REST-BE-V1" options="-parameters" />
       <module name="DSS3-MS-LOGIN-V1" options="-parameters" />
@@ -36,6 +42,7 @@
       <module name="DSS5-MS-ACTOR-V1" options="-parameters" />
       <module name="DSS6-MS-REVIEW-V1" options="-parameters" />
       <module name="DSS7-EUREKA-V1" options="-parameters" />
+      <module name="DSS8-API-GATEWAY" options="-parameters" />
     </option>
   </component>
 </project>
