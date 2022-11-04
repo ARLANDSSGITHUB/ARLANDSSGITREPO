@@ -14,7 +14,7 @@
 	<name>DSS7-EUREKA-V1</name>
 	<description>DSS7-EUREKA-V1</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
