@@ -1,28 +1,44 @@
 package com.dss;
 
+import com.dss.controller.MovieController;
 import com.dss.entity.ActorEntity;
 import com.dss.entity.MovieEntity;
 import com.dss.exception.*;
 import com.dss.feign.ActorFeign;
+import com.dss.model.Movie;
 import com.dss.repository.MovieRepository;
 import com.dss.service.MovieService;
 import com.dss.specification.MovieSpecs;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 class Dss4MsMovieV1ApplicationTests {
+    private static MockMvc mockMvc;
+
+    @InjectMocks
+    private MovieController movieController;
     @MockBean
     private MovieRepository movieRepository;
     @MockBean
@@ -32,6 +48,9 @@ class Dss4MsMovieV1ApplicationTests {
 
     @Autowired
     private MovieService movieService;
+
+    @Mock
+    private MovieService movieService2;
 
     @Test
     void saveMovieSuccessful() {
@@ -272,7 +291,7 @@ class Dss4MsMovieV1ApplicationTests {
     }
 
     @Test
-    void coverSetterAndActor() {
+    void coverSetterAndActorAndMovie() {
         ActorEntity actorEntity = new ActorEntity();
         actorEntity.setGender('M');
         actorEntity.setAge(22);
@@ -280,10 +299,60 @@ class Dss4MsMovieV1ApplicationTests {
         actorEntity.getGender();
         actorEntity.setMovies(new HashSet<>());
         actorEntity.getMovies();
+        Set<ActorEntity> actors = new HashSet<ActorEntity>();
+        Movie movie = new Movie();
+        movie.setMovieId(1);
+        movie.setMovieTitle("");
+        movie.setMovieCost(1);
+        movie.setMovieYear(2);
+        movie.setImage("");
+        movie.setActors(actors);
+        movie.getMovieId();
+        movie.getMovieTitle();
+        movie.getMovieCost();
+        movie.getMovieYear();
+        movie.getImage();
+        movie.getActors();
+        MovieEntity movieEntity = new MovieEntity(movie);
 
         ActorEntity actorEntity1 = new ActorEntity(1,"James", "Reid", 'M', 24,new HashSet<>());
         ActorEntity actorEntity2 = new ActorEntity(actorEntity);
 
+    }
+
+    @Test
+    void coverOtherMethods(){
+        Assertions.assertThrows(MovieNotFoundException.class, () -> movieService.findById(1));
+        MovieEntity movie = new MovieEntity(1
+                , "Shrek"
+                , 180
+                ,2021
+                , "Shrek.jpg"
+                , new HashSet<ActorEntity>());
+        when(movieRepository.findById(1)).thenReturn(Optional.of(movie));
+        movieService.findById(1);
+    }
+
+    @Test
+    void testSpecs(){
+        MovieEntity movie = new MovieEntity(1
+                , "Shrek"
+                , 180
+                ,2021
+                , "Shrek.jpg"
+                , new HashSet<ActorEntity>());
+        CriteriaBuilder criteriaBuilderMock = mock(CriteriaBuilder.class);
+        CriteriaQuery criteriaQueryMock = mock(CriteriaQuery.class);
+        Root<MovieEntity> personRootMock = mock(Root.class);
+        MovieSpecs.findByModel(movie).toPredicate(personRootMock, criteriaQueryMock, criteriaBuilderMock);
+    }
+
+    @Test
+    void testController() throws Exception {
+        mockMvc = MockMvcBuilders.standaloneSetup(new MovieController()).build();
+//        mockMvc.perform(get("/api/movie/findByModel")).andDo(print());
+        when(movieService2.findByModel(new MovieEntity())).thenReturn(new ArrayList<MovieEntity>());
+        movieController.findByModel(new Movie());
     }
 
 }

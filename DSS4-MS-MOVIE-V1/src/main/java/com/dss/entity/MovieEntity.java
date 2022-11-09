@@ -1,6 +1,7 @@
 package com.dss.entity;
 
 
+import com.dss.model.Movie;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
@@ -43,5 +44,14 @@ public class MovieEntity {
         this.movieYear = movieYear;
         this.image = image;
         this.actors = actors;
+    }
+
+    public MovieEntity(Movie movie) {
+        this.movieId = movie.getMovieId();
+        this.movieTitle = movie.getMovieTitle();
+        this.movieCost = movie.getMovieCost();
+        this.movieYear = movie.getMovieYear();
+        this.image = movie.getImage();
+        this.actors = movie.getActors();
     }
 }

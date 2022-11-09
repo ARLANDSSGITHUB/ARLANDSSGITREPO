@@ -1,7 +1,7 @@
 package com.dss.controller;
 
-import com.dss.entity.ActorEntity;
 import com.dss.entity.MovieEntity;
+import com.dss.model.Movie;
 import com.dss.service.MovieService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -25,9 +25,9 @@ public class MovieController {
             @ApiResponse(code = 404, message = "Service not found"),
             @ApiResponse(code = 200, message = "Success")})
     @ResponseStatus(HttpStatus.OK)
-    public MovieEntity addMovie(@RequestBody MovieEntity movie) {
-        MovieEntity savedMovie = movieService.save(movie);
-        return savedMovie;
+    public MovieEntity addMovie(@RequestBody Movie movie) {
+        MovieEntity movieEntity = new MovieEntity(movie);
+        return movieService.save(movieEntity);
     }
 
     @GetMapping("/findAllMovies")
@@ -48,10 +48,9 @@ public class MovieController {
             @ApiResponse(code = 404, message = "Service not found"),
             @ApiResponse(code = 200, message = "Success")})
     @ResponseStatus(HttpStatus.OK)
-    public List<MovieEntity> findByModel(@RequestBody MovieEntity movie) {
-        List<MovieEntity> movieEntityList = null;
-        movieEntityList = movieService.findByModel(movie);
-        return movieEntityList;
+    public List<MovieEntity> findByModel(@RequestBody Movie movie) {
+        MovieEntity movieEntity = new MovieEntity(movie);
+        return movieService.findByModel(movieEntity);
     }
 
     @GetMapping("/findById/{movieId}")
@@ -72,9 +71,9 @@ public class MovieController {
             @ApiResponse(code = 404, message = "Service not found"),
             @ApiResponse(code = 200, message = "Success")})
     @ResponseStatus(HttpStatus.OK)
-    public MovieEntity updateMovie(@PathVariable(value = "movieId") Integer movieId, @RequestBody MovieEntity movieEntity) {
-        MovieEntity updatedMovieEntity = movieService.update(movieId, movieEntity);
-        return updatedMovieEntity;
+    public MovieEntity updateMovie(@PathVariable(value = "movieId") Integer movieId, @RequestBody Movie movie) {
+        MovieEntity movieEntity = new MovieEntity(movie);
+        return movieService.update(movieId, movieEntity);
     }
 
     @DeleteMapping("/deleteMovie/{movieId}")
