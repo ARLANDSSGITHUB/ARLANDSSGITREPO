@@ -4,6 +4,7 @@ import com.dss.entity.AdminEntity;
 import com.dss.exception.AdminAlreadyExistException;
 import com.dss.exception.InvalidInputException;
 import com.dss.exception.PhoneNumberAlreadyInUseException;
+import com.dss.model.Admin;
 import com.dss.repository.AdminRepository;
 import com.dss.service.AdminService;
 import org.junit.jupiter.api.Assertions;
@@ -118,7 +119,7 @@ class Dss3MsLoginV1ApplicationTests {
 				, "Arlan"
 				, "Antique"
 				,"09999999999"
-				, "161ebd7d45089b3446ee4e0d86dbcf92");
+				, "6bfcc4026b5f162799a6dc8305c09db9c1674ac616bd5c7422a45fbb6d0816ac163047c47a1f426f4f4c6b5b5042c671eabc4fdc7310fd5b183eef59dc274604");
 
 		Mockito.when(adminService.findByEmailIdAndPassword(admin.getEmailId(),admin.getPassword())).thenReturn(admin);
 		Assertions.assertEquals("Successfully logged in", adminService.login("arlan@gmail.com","P@ssw0rd"));
@@ -139,6 +140,35 @@ class Dss3MsLoginV1ApplicationTests {
 	@Test
 	void loginFailedNullPointer(){
 		Assertions.assertThrows(InvalidInputException.class, () -> adminService.login(null,null));
+	}
+	@Test
+	void coverAdmin(){
+		Admin admin = new Admin();
+		admin.setEmailId("");
+		admin.setFirstName("");
+		admin.setLastName("");
+		admin.setPhoneNumber("");
+		admin.setPassword("");
+		admin.getEmailId();
+		admin.getFirstName();
+		admin.getLastName();
+		admin.getLastName();
+		admin.getPhoneNumber();
+		admin.getPassword();
+
+	}
+
+	@Test
+	void coverAdminEntity() {
+		Admin admin = new Admin();
+		admin.setEmailId("");
+		admin.setFirstName("");
+		admin.setLastName("");
+		admin.setPhoneNumber("");
+		admin.setPassword("");
+
+		AdminEntity adminEntity = new AdminEntity(admin);
+		AdminEntity adminEntity2 = new AdminEntity();
 	}
 
 }

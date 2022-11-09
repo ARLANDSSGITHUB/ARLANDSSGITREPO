@@ -1,5 +1,6 @@
 package com.dss.entity;
 
+import com.dss.model.Admin;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +29,15 @@ public class AdminEntity {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.password = password;
+    }
+
+
+    public AdminEntity(Admin admin) {
+        this.emailId = admin.getEmailId();
+        this.firstName = admin.getFirstName();
+        this.lastName = admin.getLastName();
+        this.phoneNumber = admin.getPhoneNumber();
+        this.password = admin.getPassword();
     }
 
 }

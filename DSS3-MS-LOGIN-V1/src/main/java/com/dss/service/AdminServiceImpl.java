@@ -69,7 +69,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     private String hashPassword(String password) throws NoSuchAlgorithmException {
-        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
         byte[] passwordInBytes = password.getBytes();
         messageDigest.update(passwordInBytes);
         byte[] resultByteArray = messageDigest.digest();
