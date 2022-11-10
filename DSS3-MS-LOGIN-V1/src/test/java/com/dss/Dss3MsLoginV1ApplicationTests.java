@@ -1,5 +1,6 @@
 package com.dss;
 
+import com.dss.controller.AdminController;
 import com.dss.entity.AdminEntity;
 import com.dss.exception.AdminAlreadyExistException;
 import com.dss.exception.InvalidInputException;
@@ -9,19 +10,37 @@ import com.dss.repository.AdminRepository;
 import com.dss.service.AdminService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.env.Environment;
+import org.springframework.test.annotation.DirtiesContext;
 
-@SpringBootTest
+import java.util.ArrayList;
+
+import static org.mockito.Mockito.when;
+
+@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext
 class Dss3MsLoginV1ApplicationTests {
+
+	@InjectMocks
+	private AdminController adminController;
 
 	@MockBean
 	private AdminRepository adminRepository;
 
 	@Autowired
 	private AdminService adminService;
+
+	@Mock
+	private AdminService adminService2;
+
+	@Mock
+	private Environment environment;
 
 	@Test
 	void registerSuccess(){
@@ -170,5 +189,13 @@ class Dss3MsLoginV1ApplicationTests {
 		AdminEntity adminEntity = new AdminEntity(admin);
 		AdminEntity adminEntity2 = new AdminEntity();
 	}
+	@Test
+	void testController(){
+		adminController.register(new Admin());
+		adminController.login(new Admin());
+		when(environment.getProperty("local.server.port")).thenReturn("9005");
+		adminController.getInstancePort();
+	}
+
 
 }
