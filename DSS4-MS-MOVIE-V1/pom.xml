@@ -107,12 +107,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <excludes>
-                        <exclude>com/dss/controller/*</exclude>
-                        <exclude>com/dss/specification/*</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>

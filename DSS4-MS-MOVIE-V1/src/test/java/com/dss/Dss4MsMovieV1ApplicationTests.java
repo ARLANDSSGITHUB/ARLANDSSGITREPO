@@ -18,8 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -27,15 +25,12 @@ import javax.persistence.criteria.Root;
 import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 class Dss4MsMovieV1ApplicationTests {
-    private static MockMvc mockMvc;
 
     @InjectMocks
     private MovieController movieController;
@@ -348,11 +343,16 @@ class Dss4MsMovieV1ApplicationTests {
     }
 
     @Test
-    void testController() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(new MovieController()).build();
-//        mockMvc.perform(get("/api/movie/findByModel")).andDo(print());
+    void testController(){
         when(movieService2.findByModel(new MovieEntity())).thenReturn(new ArrayList<MovieEntity>());
         movieController.findByModel(new Movie());
+        movieController.addMovie(new Movie());
+        when(movieService2.findAllMovies()).thenReturn(new ArrayList<MovieEntity>());
+        movieController.findAllMovies();
+        movieController.findById(1);
+        movieController.updateMovie(1,new Movie());
+        when(movieService2.delete(anyInt())).thenReturn(Optional.of(new MovieEntity()));
+        movieController.deleteMovieById(1);
     }
 
 }
