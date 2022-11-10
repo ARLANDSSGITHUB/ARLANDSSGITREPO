@@ -1,6 +1,7 @@
 package com.dss.controller;
 
 import com.dss.entity.ActorEntity;
+import com.dss.model.Actor;
 import com.dss.service.ActorService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -24,9 +25,9 @@ public class ActorController {
             @ApiResponse(code = 404, message = "Service not found"),
             @ApiResponse(code = 200, message = "Success")})
     @ResponseStatus(HttpStatus.OK)
-    public ActorEntity addActor(@RequestBody ActorEntity actor) {
-        ActorEntity savedActor = actorService.save(actor);
-        return savedActor;
+    public ActorEntity addActor(@RequestBody Actor actor) {
+        ActorEntity actorEntity = new ActorEntity(actor);
+        return actorService.save(actorEntity);
     }
 
     @GetMapping("/findAllActors")
@@ -46,10 +47,9 @@ public class ActorController {
             @ApiResponse(code = 404, message = "Service not found"),
             @ApiResponse(code = 200, message = "Success")})
     @ResponseStatus(HttpStatus.OK)
-    public List<ActorEntity> findByModel(@RequestBody ActorEntity actor){
-        List<ActorEntity> actorEntityList = null;
-        actorEntityList = actorService.findByModel(actor);
-        return actorEntityList;
+    public List<ActorEntity> findByModel(@RequestBody Actor actor){
+        ActorEntity actorEntity = new ActorEntity(actor);
+        return actorService.findByModel(actorEntity);
     }
 
     @GetMapping("/findById/{actorId}")
@@ -70,9 +70,9 @@ public class ActorController {
             @ApiResponse(code = 404, message = "Service not found"),
             @ApiResponse(code = 200, message = "Success")})
     @ResponseStatus(HttpStatus.OK)
-    public ActorEntity updateActor(@PathVariable(value = "actorId") Integer actorId, @RequestBody ActorEntity actorEntity) {
-        ActorEntity updatedActorEntity = actorService.update(actorId, actorEntity);
-        return updatedActorEntity;
+    public ActorEntity updateActor(@PathVariable(value = "actorId") Integer actorId, @RequestBody Actor actor) {
+        ActorEntity actorEntity = new ActorEntity(actor);
+        return actorService.update(actorId, actorEntity);
     }
 
     @DeleteMapping("/deleteActor/{actorId}")

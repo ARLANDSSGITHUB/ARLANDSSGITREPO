@@ -1,6 +1,7 @@
 package com.dss.entity;
 
 
+import com.dss.model.Actor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,5 +37,13 @@ public class ActorEntity {
         this.lastName = actorEntity.lastName;
         this.gender = actorEntity.gender;
         this.age = actorEntity.age;
+    }
+
+    public ActorEntity(Actor actor) {
+        this.actorId = actor.getActorId();
+        this.firstName = actor.getFirstName();
+        this.lastName = actor.getLastName();
+        this.gender = actor.getGender();
+        this.age = actor.getAge();
     }
 }
