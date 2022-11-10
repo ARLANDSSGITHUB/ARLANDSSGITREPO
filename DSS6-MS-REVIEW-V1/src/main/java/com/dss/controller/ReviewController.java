@@ -1,6 +1,7 @@
 package com.dss.controller;
 
 import com.dss.entity.ReviewEntity;
+import com.dss.model.Review;
 import com.dss.service.ReviewService;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -23,9 +24,9 @@ public class ReviewController {
             @ApiResponse(code = 404, message = "Service not found"),
             @ApiResponse(code = 200, message = "Success")})
     @ResponseStatus(HttpStatus.OK)
-    public ReviewEntity addReview(@RequestBody ReviewEntity review) {
-        ReviewEntity savedReview = reviewService.save(review);
-        return savedReview;
+    public ReviewEntity addReview(@RequestBody Review review) {
+        ReviewEntity savedReview = new ReviewEntity(review);
+        return reviewService.save(savedReview);
     }
 
     @GetMapping("/findAllReviews")
@@ -34,20 +35,22 @@ public class ReviewController {
             @ApiResponse(code = 404, message = "Service not found"),
             @ApiResponse(code = 200, message = "Success")})
     @ResponseStatus(HttpStatus.OK)
-    public List<ReviewEntity> findAllReviews(){
+    public List<ReviewEntity> findAllReviews() {
         List<ReviewEntity> reviewEntityList = null;
         reviewEntityList = reviewService.findAllReviews();
         return reviewEntityList;
     }
+
     @GetMapping("/findByModel")
     @ApiResponses(value = {
             @ApiResponse(code = 500, message = "Server error"),
             @ApiResponse(code = 404, message = "Service not found"),
             @ApiResponse(code = 200, message = "Success")})
     @ResponseStatus(HttpStatus.OK)
-    public List<ReviewEntity> findByModel(@RequestBody ReviewEntity review){
+    public List<ReviewEntity> findByModel(@RequestBody Review review) {
+        ReviewEntity savedReview = new ReviewEntity(review);
         List<ReviewEntity> reviewEntityList = null;
-        reviewEntityList = reviewService.findByModel(review);
+        reviewEntityList = reviewService.findByModel(savedReview);
         return reviewEntityList;
     }
 }

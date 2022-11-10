@@ -1,6 +1,6 @@
 package com.dss.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.dss.model.Review;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,6 +35,14 @@ public class ReviewEntity {
 
     public ReviewEntity(){
 
+    }
+
+    public ReviewEntity(Review review){
+        this.reviewId = review.getReviewId();
+        this.description = review.getDescription();
+        this.datePosted = review.getDatePosted();
+        this.rating = review.getRating();
+        this.movie = review.getMovie();
     }
 }
 
