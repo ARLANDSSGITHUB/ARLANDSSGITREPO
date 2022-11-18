@@ -5,6 +5,7 @@ import com.dss.exception.AdminAlreadyExistException;
 import com.dss.exception.InvalidInputException;
 import com.dss.exception.PhoneNumberAlreadyInUseException;
 import com.dss.repository.AdminRepository;
+import com.dss.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ import java.util.regex.Pattern;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminRepository adminRepository;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Override
     public AdminEntity save(AdminEntity adminEntity) {
@@ -57,7 +60,8 @@ public class AdminServiceImpl implements AdminService {
             AdminEntity registration = findByEmailIdAndPassword(userName, hashedPassword);
             if (registration != null) {
                 loginMessage = "Successfully logged in";
-                return loginMessage;
+                String token = jwtUtil.generateToken(userName);
+                return token;
             }
         } catch (NoSuchAlgorithmException e) {
             System.out.println("No Such Algorithm....");
